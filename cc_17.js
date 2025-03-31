@@ -53,6 +53,8 @@ getClientTotal(name) {                  //created a function that returns client
 //created a test variable
 let salesRepresentative1 = new SalesRep("Alikhan Nasyrbekov");
 salesRepresentative1.addClient(customer);
+
+
 //logged sales reps details, client database, and representative's clients' total spending 
 console.log(`${salesRepresentative1.name} - Sales Representative`);
 console.log(`${salesRepresentative1.name}'s Existing Client Database: ${salesRepresentative1.clients.map(c => c.name).toString()}`);
@@ -88,35 +90,42 @@ console.log(`Total Amount Spent: $${VipCustomer1.getTotalSpent().toFixed(2)}`)
 
 // Task 4: Build a Client Report System
 
-// let VipCustomer2 = new VIPCustomer("Sergey Brin", "sergeybrin@uclc.edu", "Platinum");
-// VipCustomer2.addPurchase(100);
-// VipCustomer2.addPurchase(200);
-// VipCustomer2.addPurchase(500);
+let VipCustomer2 = new VIPCustomer("Sergey Brin", "sergeybrin@uclc.edu", "Platinum");   //created 1 vip and 2 regular customers and assigneed values using addPurchase function 
+VipCustomer2.addPurchase(100);
+VipCustomer2.addPurchase(200);
+VipCustomer2.addPurchase(500);
 
-// let customer2 = new Customer("Larry Page", "pagelarry@gmail.com");
-// customer2.addPurchase(45);
-// customer2.addPurchase(86);
-// customer2.addPurchase(300);
+let customer2 = new Customer("Larry Page", "pagelarry@gmail.com");
+customer2.addPurchase(45);
+customer2.addPurchase(86);
+customer2.addPurchase(300);
 
-// let customer3 = new Customer("Steve Ballmer", "ballmers@apple.icloud");
-// customer3.addPurchase(50);
-// customer3.addPurchase(480);
-// customer3.addPurchase(20);
+let customer3 = new Customer("Steve Ballmer", "ballmers@apple.icloud");
+customer3.addPurchase(50);
+customer3.addPurchase(480);
+customer3.addPurchase(20);
 
-// const regularVipClients = [customer, customer2, customer3, VipCustomer1, VipCustomer2];
+const regularVipClients = [customer, customer2, customer3, VipCustomer1, VipCustomer2]; //created an array to store all the client data
 
-// const revenue = regularVipClients.reduce((sum, total) => sum + total.getTotalSpent(), 0);
+const revenue = regularVipClients.reduce((sum, total) => sum + total.getTotalSpent(), 0);   //used reduce to calculate the total amount spent by all customers in the array
 
-// const HighSpendClients = regularVipClients.filter(c => c.getTotalSpent() > 500)
+const HighSpendClients = regularVipClients.filter(c => c.getTotalSpent() > 500)         //used filter to only include customers with > $500 spending
 
 
-// const customerData = regularVipClients.map(c => {
-//     return {
-//         name: c.name,
-//         totalAmount: `$${c.getTotalSpent().toFixed(2)}`
-//     }
-// })
+const customerData = regularVipClients.map(c => {               //used map to create an array of customers' names and their total individual spending
+    return {
+        name: c.name,
+        totalAmount: `$${c.getTotalSpent().toFixed(2)}`
+    }
+})
 
-// console.log(`Total Revenue: $${revenue.toFixed(2)}`)
-// console.log(HighSpendClients.toString())
-// console.log(`Customer Summary: ${}`)
+console.log(`Total Revenue: $${revenue.toFixed(2)}`)        //logged total revenue (all customers' total spending)
+
+for (const client of HighSpendClients){                     //created a loop of high spending clients and printed their names and total spending
+    console.log(`High-spending customer: ${client.name}, Spending: $${client.getTotalSpent().toFixed(2)}`)
+} 
+
+console.log("Customer summary:")                        //logged customer summary (each clients' name + their spending)
+customerData.forEach(customerD =>{
+    console.log(`${customerD.name}, ${customerD.totalAmount}`)
+})
